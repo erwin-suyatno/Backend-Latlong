@@ -32,7 +32,6 @@ class Graph():
         self.weights[(from_node, to_node)] = weight
         self.weights[(to_node, from_node)] = weight
 
-
 def dijsktra(graph, initial, end):
     # shortest paths is a dict of nodes
     # whose value is a tuple of (previous node, weight)
