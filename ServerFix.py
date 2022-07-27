@@ -1,3 +1,4 @@
+from crypt import methods
 import json
 import re
 import pandas as pd
@@ -12,6 +13,9 @@ app = Flask(__name__)
 
 awal = np.array([])
 akhir = np.array([])
+mapsLink  = []
+point_routing = []
+
 
 class Graph():
     def __init__(self):
@@ -111,7 +115,6 @@ def addData():
     routing = dijsktra(g, index_awal, index_akhir)
     print(routing)
 
-    point_routing = []
     coordinates = []
     distance_meter = 0
 
@@ -140,9 +143,20 @@ def addData():
         output = format_point % (df["latitude"], df["longitude"])
         glink += output
     glink += format_point % (akhir[0], akhir[1])
-    print(glink)
+    mapsLink.append(glink)
+    mapsLink.pop(0)
+    #print(mapsLink)
     plt.show()
-    return "received"
+    return mapsLink
 
+@app.route("/getLink", methods=["GET"])
+def getLink():
+    Link = mapsLink[0]
+    print(Link)
+    return Link
+
+@app.route("/getNode", methods=["GET"])
+def getNode():
+    return str(point_routing)
 if __name__ == "__main__":
   app.run(host="0.0.0.0", debug=True)
