@@ -1,4 +1,3 @@
-from crypt import methods
 import json
 import re
 import pandas as pd
@@ -144,9 +143,8 @@ def addData():
         glink += output
     glink += format_point % (akhir[0], akhir[1])
     mapsLink.append(glink)
-    mapsLink.pop(0)
     #print(mapsLink)
-    plt.show()
+    #plt.show()
     return mapsLink
 
 @app.route("/getLink", methods=["GET"])
